@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dog Breed Classification</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Dog Breed Classification</h1>
+    <form enctype="multipart/form-data">
+        <input type="file" name="image_file" id="image_file">
+        <button type="button" onclick="classifyDog()">Classify Dog Breed</button>
+    </form>
+    <br>
+    <img src="" id="image_preview" alt="Image Preview" style="max-width: 300px;">
+    <br><br>
+    <p id="classification_result"></p>
+    <br>
+    <img src="" id='image_0' alt="Image most resemblance" style="max-width: 300px;">
+    <br>
+    <img  src="../static/Affenpinscher_00003.jpg">
+
+    <script>
+        function classifyDog() {
+            var image_file = document.getElementById('image_file').files[0];
+
+            // Create a new FormData object and append the selected image file to it
+            var form_data = new FormData();
+            form_data.append('image_file', image_file);
+
+            // Send an AJAX request to the Flask server to classify the breed of the dog in the image
+            $.ajax({
+                type: 'POST',
+                url: 'http://192.168.1.154:3000/classify',
+                data: form_data,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    // Display the classification result
+                    document.getElementById('classification_result').innerHTML = 'The dog breed this image moste resembles is: ' + data.name_0 + ' (' + data.percentage_0 + '%)' + data.random_img_0;
+                    // Set the src of first image
+                    document.getElementById('image_0').src = data.random_img_0;
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+
+            // Preview the selected image
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('image_preview').src = e.target.result;
+            };
+            reader.readAsDataURL(image_file);
+        }
+    </script>
+</body>
+</html>
