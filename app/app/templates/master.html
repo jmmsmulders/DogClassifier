@@ -5,21 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
     <h1>Dog Breed Classification</h1>
-    <form enctype="multipart/form-data">
-        <input type="file" name="image_file" id="image_file">
-        <button type="button" onclick="classifyDog()">Classify Dog Breed</button>
-    </form>
-    <br>
-    <img src="" id="image_preview" alt="Image Preview" style="max-width: 300px;">
-    <br><br>
-    <p id="classification_result"></p>
-    <br>
-    <img src="" id='image_0' alt="Image most resemblance" style="max-width: 300px;">
-    <br>
-    <img  src="../static/Affenpinscher_00003.jpg">
+
+    <div class ="row">
+        <div class="col-4">
+            <form enctype="multipart/form-data">
+                <input type="file" name="image_file" id="image_file">
+                <button type="button" onclick="classifyDog()">Classify Dog Breed</button>
+            </form>
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class="col-12 text-center">
+            <img src="" id="image_preview" style="max-width: 300;max-height: 300px">
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class="col-4">
+            <p id="classification_0"></p>
+            <img src="" id='image_0' style="max-width: 300;max-height: 300px">
+        </div>
+        <div class="col-4">
+            <p id="classification_1"></p>
+            <img src="" id='image_1' style="max-width: 300;max-height: 300px">
+        </div>
+        <div class="col-4">
+            <p id="classification_2"></p>
+            <img src="" id='image_2' style="max-width: 300;max-height: 300px">
+        </div>
+    </div>
+    
+
 
     <script>
         function classifyDog() {
@@ -28,19 +51,32 @@
             // Create a new FormData object and append the selected image file to it
             var form_data = new FormData();
             form_data.append('image_file', image_file);
+            
+            // Get the base URL of the current web page
+            var base_url = window.location.origin;
+
+            // Define the Flask route that you want to call
+            var flask_route = '/classify';
+
+            // Concatenate the base URL and the Flask route to get the full URL
+            var url = base_url + flask_route;
 
             // Send an AJAX request to the Flask server to classify the breed of the dog in the image
             $.ajax({
                 type: 'POST',
-                url: 'http://192.168.1.154:3000/classify',
+                url: url,
                 data: form_data,
                 processData: false,
                 contentType: false,
                 success: function(data) {
                     // Display the classification result
-                    document.getElementById('classification_result').innerHTML = 'The dog breed this image moste resembles is: ' + data.name_0 + ' (' + data.percentage_0 + '%)' + data.random_img_0;
-                    // Set the src of first image
+                    document.getElementById('classification_0').innerHTML = 'The dog breed this image resembles most is: ' + data.name_0 + ' (' + data.percentage_0 + '%)';
+                    document.getElementById('classification_1').innerHTML = 'On second place: ' + data.name_1 + ' (' + data.percentage_1 + '%)';
+                    document.getElementById('classification_2').innerHTML = 'On third place: ' + data.name_2 + ' (' + data.percentage_2 + '%)';
+                    // Set the src of the images
                     document.getElementById('image_0').src = data.random_img_0;
+                    document.getElementById('image_1').src = data.random_img_1;
+                    document.getElementById('image_2').src = data.random_img_2;
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
