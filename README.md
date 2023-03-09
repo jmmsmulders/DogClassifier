@@ -9,7 +9,7 @@ This repo consists of the following parts:
 - App: The code needed to run the Flask App
  
 ## Installation
-In order to run all the code in this repo you need at least need to have a python installation and the python packages `keras`, `glob`, `tensorflow (version == 1.4.46)`, `sklearn`, `PIL`, `io`
+In order to run all the code in this repo you need at least need to have a python installation and the python packages, the versions shown here are the versions I used to create this App. `keras (2.11.0)`, `tensorflow (2.11.0)`, `sklearn`, `Pillow (9.4.0)`, `opencv-python (4.7.0.72)`
 
 ## Usage
 In order to run the Flask App, navigate tot the app-folder with `cd app` then run the following command in an interpreter: `python run.py`
