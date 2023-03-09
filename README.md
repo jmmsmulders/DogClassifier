@@ -33,6 +33,8 @@ These datasets need to be downloaded locally and the folder reference in the not
 
 The ResNet50 bottleneck features are already present in the Repo.
 
+NB: At the end of the notebook I tested the algorithm on some local images I have saved on my PC, those images are deleted in this Repo so if you want to do something similar you should create some test-images yourself.
+
 ## Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
