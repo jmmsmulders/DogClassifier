@@ -26,7 +26,7 @@ Where you can manually input an image on your PC, by pressing the "Classify Dog 
 If you want to replicate the Jupyter-Notebook in this Repo, the datasets used are the following:
 
 [Dog Dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip)
-[Humans Dataset] (https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip)
+[Humans Dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip)
 
 These datasets need to be downloaded locally and the folder reference in the notebook has to point to that folder.
 
