@@ -9,40 +9,59 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
+
 <body>
-    <h1>Dog Breed Classification</h1>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header text-center">
+                <a class="navbar-brand" >Dog Breed Classification</a>
+                <div class="subtitle-wrapper">
+                    <a class="navbar-subtitle" style="font-size: 8; color:black;">Capstone Project for the Udacity Data Scientist Program</a>
+                    <a class="navbar-subtitle" style="font-size: 8; color:black;">By Joep Smulders</a>
+                </div>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://www.linkedin.com/in/joep-smulders-200203117/">LinkedIn</a></li>
+                <li><a href="https://github.com/jmmsmulders">Github</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <form enctype="multipart/form-data">
+                    <input type="file" name="image_file" id="image_file">
+                    <br>
+                    <button type="button" onclick="classifyDog()">Classify Dog Breed</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="" id="image_preview" style="max-width: 300;max-height: 300px">
+                <br>
+                <br>
+                <p id="human_dog_check"></p>
+            </div>
+        </div>
 
-    <div class ="row">
-        <div class="col-4">
-            <form enctype="multipart/form-data">
-                <input type="file" name="image_file" id="image_file">
-                <button type="button" onclick="classifyDog()">Classify Dog Breed</button>
-            </form>
+        <div class="row">
+            <div class="col-md-4">
+                <p id="classification_0"></p>
+                <img src="" id='image_0' style="max-width: 300px;max-height: 300px">
+            </div>
+            <div class="col-md-4">
+                <p id="classification_1"></p>
+                <img src="" id='image_1' style="max-width: 300px;max-height: 300px">
+            </div>
+            <div class="col-md-4">
+                <p id="classification_2"></p>
+                <img src="" id='image_2' style="max-width: 300px;max-height: 300px">
+            </div>
         </div>
-    </div>
-
-    <div class = "row">
-        <div class="col-12 text-center">
-            <img src="" id="image_preview" style="max-width: 300;max-height: 300px">
-        </div>
-    </div>
-
-    <div class = "row">
-        <div class="col-4">
-            <p id="classification_0"></p>
-            <img src="" id='image_0' style="max-width: 300;max-height: 300px">
-        </div>
-        <div class="col-4">
-            <p id="classification_1"></p>
-            <img src="" id='image_1' style="max-width: 300;max-height: 300px">
-        </div>
-        <div class="col-4">
-            <p id="classification_2"></p>
-            <img src="" id='image_2' style="max-width: 300;max-height: 300px">
-        </div>
-    </div>
-    
-
+    </div>   
 
     <script>
         function classifyDog() {
@@ -73,6 +92,7 @@
                     document.getElementById('classification_0').innerHTML = 'The dog breed this image resembles most is: ' + data.name_0 + ' (' + data.percentage_0 + '%)';
                     document.getElementById('classification_1').innerHTML = 'On second place: ' + data.name_1 + ' (' + data.percentage_1 + '%)';
                     document.getElementById('classification_2').innerHTML = 'On third place: ' + data.name_2 + ' (' + data.percentage_2 + '%)';
+                    document.getElementById('human_dog_check').innerHTML = data.human_dog;
                     // Set the src of the images
                     document.getElementById('image_0').src = data.random_img_0;
                     document.getElementById('image_1').src = data.random_img_1;
