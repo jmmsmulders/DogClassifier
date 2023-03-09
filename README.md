@@ -46,4 +46,5 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 ## Contact
 Joep Smulders - (https://www.linkedin.com/in/joep-smulders-200203117/) - smulders.jmm@gmail.com
-Project Link: (https://github.com/jmmsmulders/ThreeInARow)
+
+Project Link: (https://github.com/jmmsmulders/DogClassifier)
